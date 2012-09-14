@@ -1,0 +1,876 @@
+<?xml version="1.0"?>
+<SyntaxDefinition name ="AEGIS" extensions = ".sc">
+	
+	<Digits name ="Digits" bold ="false" italic ="false" color ="#FF8000"/>
+	
+	<RuleSets>
+		<RuleSet ignorecase = "false">
+			<Delimiters>~!%^*()-+=|\#/{}[]:;"'&lt;&gt; , .?</Delimiters>
+			
+			<Span name ="LINECOMMENT" rule = "TestSet" bold ="false" italic ="true" color ="#008000" stopateol ="true">
+				<Begin>//@!/@</Begin>
+			</Span>
+			
+			<Span name ="BLOCKCOMMENT" rule = "TestSet" bold ="false" italic ="true" color ="#008000" stopateol ="false">
+				<Begin>/*</Begin>
+				<End>*/</End>
+			</Span>
+			
+			<Span name ="STRING" bold ="false" italic ="false" color ="Red" stopateol ="true" escapecharacter="\">
+				<Begin>"</Begin>
+				<End>"</End>
+			</Span>
+			
+			<MarkPrevious bold ="true" italic ="false" color ="MidnightBlue">(</MarkPrevious>
+			
+			<KeyWords name ="Punctuation" bold ="false" italic ="false" color ="DarkGreen">
+				<Key word = "?" />
+				<Key word = "," />
+				<Key word = "." />
+				<Key word = "(" />
+				<Key word = ")" />
+				<Key word = "[" />
+				<Key word = "]" />
+				<Key word = "{" />
+				<Key word = "}" />
+				<Key word = "+" />
+				<Key word = "-" />
+				<Key word = "/" />
+				<Key word = "%" />
+				<Key word = "*" />
+				<Key word = "&lt;" />
+				<Key word = "&gt;" />
+				<Key word = "^" />
+				<Key word = "!" />
+				<Key word = "|" />
+			</KeyWords>
+			
+			<KeyWords name ="AccessKeywords" bold="true" italic = "false" color = "Black">
+			</KeyWords>
+			
+			<KeyWords name ="OperatorKeywords" bold="true" italic = "false" color = "DarkCyan">
+			</KeyWords>
+			
+			
+			<KeyWords name ="SelectionStatements" bold="true" italic = "false" color = "Blue">
+				<Key word = "else" />
+				<Key word = "if" />
+				<Key word = "choose" />
+				<Key word = "endchoose" />
+				<Key word = "case" />
+				<Key word = "endif" />
+				<Key word = "elseif" />
+			</KeyWords>
+			
+			<KeyWords name ="IterationStatements" bold="true" italic = "false" color = "Blue">
+				<Key word = "for" />
+				<Key word = "while" />
+				<Key word = "endwhile" />
+			</KeyWords>
+			
+			<KeyWords name ="JumpStatements" bold="false" italic = "false" color = "Navy">
+			</KeyWords>
+			
+			<KeyWords name ="ExceptionHandlingStatements" bold="true" italic = "false" color = "Teal">
+			</KeyWords>
+			
+			<KeyWords name ="ValueTypes" bold="true" italic = "false" color = "Red">
+			</KeyWords>
+			
+			<KeyWords name ="ReferenceTypes" bold="false" italic = "false" color = "Red">
+			</KeyWords>
+			
+			<KeyWords name ="Void" bold="false" italic = "false" color = "Red">
+			</KeyWords>
+			
+			<KeyWords name ="AccessModifiers" bold="true" italic = "false" color = "Blue">
+        <Key word = "OnInit:" />
+        <Key word = "OnClick:" />
+        <Key word = "OnTouch:" />
+        <Key word = "OnMyMobDead:" />
+        <Key word = "OnTimer:" />
+        <Key word = "OnCommand:" />
+        <Key word = "OnStartArena:" />
+        <Key word = "OnTouchNPC:" />
+        <Key word = "OnTouch2:" />
+			</KeyWords>
+			
+			<KeyWords name ="GetSet" bold="false" italic = "false" color = "SaddleBrown">
+			</KeyWords>
+			
+			<KeyWords name ="Literals" bold="true" italic = "false" color = "Black">
+			</KeyWords>
+			
+			<KeyWords name ="Statements" bold="true" italic = "false" color = "DarkBlue">
+        <Key word = "var" />
+        <Key word = "return" />
+        <Key word = "item" />
+        <Key word = "event" />
+        <Key word = "get" />
+        <Key word = "inc" />
+        <Key word = "dec" />
+        <Key word = "EnableSkill" />
+        <Key word = "DisableSkill" />
+        <Key word = "Summon" />
+        <Key word = "Skill" />
+        <Key word = "CreateItem" />
+        <Key word = "LostItem" />
+        <Key word = "HealHP" />
+        <Key word = "HealSP" />
+        <Key word = "HealAll" />
+        <Key word = "Condition" />
+        <Key word = "Cure" />
+        <Key word = "AddExtParam" />
+        <Key word = "SubExtParam" />
+        <Key word = "SetMakableWpnItemList" />
+        <Key word = "SetMakableMtlItemList" />
+        <Key word = "RaceAddDamage" />
+        <Key word = "RaceSubDamage" />
+        <Key word = "AddAttrTolerace" />
+        <Key word = "SubAttrTolerace" />
+        <Key word = "AddRaceTolerace" />
+        <Key word = "SubRaceTolerace" />
+        <Key word = "AddDamage_Property" />
+        <Key word = "SubDamage_Property" />
+        <Key word = "AddDamage_Size" />
+        <Key word = "SubDamage_Size" />
+        <Key word = "AddDamage_Name" />
+        <Key word = "SubDamage_Name" />
+        <Key word = "AddDamage_SKID" />
+        <Key word = "SubDamage_SKID" />
+        <Key word = "AddDamage_CRI" />
+        <Key word = "SubDamage_CRI" />
+        <Key word = "AddState_MLEATK" />
+        <Key word = "SubState_MLEATK" />
+        <Key word = "AddState_MLEAttacked" />
+        <Key word = "SubState_MLEAttacked" />
+        <Key word = "AddHealPercent_ITEM" />
+        <Key word = "SubHealPercent_ITEM" />
+        <Key word = "AddHealAmount_Kill" />
+        <Key word = "SubHealAmount_Kill" />
+        <Key word = "IndestructibleArmor" />
+        <Key word = "IndestructibleWeapon" />
+        <Key word = "AddStateTolerace" />
+        <Key word = "SubStateTolerace" />
+        <Key word = "BodyAttribute" />
+        <Key word = "SubRangeAttackDamage" />
+        <Key word = "AddRangeAttackDamage" />
+        <Key word = "NoDispell" />
+        <Key word = "AddHPdrain" />
+        <Key word = "SubHPdrain" />
+        <Key word = "Magicimmune" />
+        <Key word = "NoJamstone" />
+        <Key word = "AddSPdrain" />
+        <Key word = "SubSPdrain" />
+        <Key word = "AddMeleeAttackReflect" />
+        <Key word = "SubMeleeAttackReflect" />
+        <Key word = "PerfectDamage" />
+        <Key word = "Reincarnation" />
+        <Key word = "SubSpellCastTime" />
+        <Key word = "AddSpellCastTime" />
+        <Key word = "SplashAttack" />
+        <Key word = "SubSPconsumption" />
+        <Key word = "AddSPconsumption" />
+        <Key word = "StartCapture" />
+        <Key word = "Incubation" />
+        <Key word = "AddAtk_DamageWeapon" />
+        <Key word = "SubAtk_DamageWeapon" />
+        <Key word = "AddAtk_DamageArmor" />
+        <Key word = "SubAtk_DamageArmor" />
+        <Key word = "AddReceiveItem_Race" />
+        <Key word = "SubReceiveItem_Race" />
+        <Key word = "SetIgnoreDEFRace" />
+        <Key word = "ResetIgnoreDEFRace" />
+        <Key word = "SetIgnoreDEFClass" />
+        <Key word = "ResetIgnoreDEFClass" />
+        <Key word = "SetDisappearHPAmount" />
+        <Key word = "ResetDisappearHPAmount" />
+        <Key word = "SetDisappearSPAmount" />
+        <Key word = "ResetDisappearSPAmount" />
+        <Key word = "SetAutoSpell" />
+        <Key word = "AddAtk_ComaRace" />
+        <Key word = "SubAtk_ComaRace" />
+        <Key word = "AddAtk_Coma" />
+        <Key word = "SubAtk_Coma" />
+        <Key word = "SubSPAmount_Action" />
+        <Key word = "AddSPAmount_Action" />
+        <Key word = "SubSPAmount_Attack" />
+        <Key word = "AddSPAmount_Attack" />
+        <Key word = "AddSPAmount_AtkRace" />
+        <Key word = "SubSPAmount_AtkRace" />
+        <Key word = "AddDestroySP_Attack" />
+        <Key word = "SubDestroySP_Attack" />
+        <Key word = "AddSPAmount_KillRace" />
+        <Key word = "SubSPAmount_KillRace" />
+        <Key word = "AddEXPPercent_KillRace" />
+        <Key word = "SubEXPPercent_KillRace" />
+        <Key word = "ClassAddDamage" />
+        <Key word = "ClassSubDamage" />
+        <Key word = "RaceAddDamageSelf" />
+        <Key word = "RaceSubDamageSelf" />
+        <Key word = "SetInvestigate" />
+        <Key word = "ResetInvestigate" />
+        <Key word = "ModifyDEF_Fraction" />
+        <Key word = "AddGuideAttack" />
+        <Key word = "SubGuideAttack" />
+        <Key word = "AddChangeMonster" />
+        <Key word = "SubChangeMonster" />
+        <Key word = "AddCRIPercent_Race" />
+        <Key word = "SubCRIPercent_Race" />
+        <Key word = "SetPushingSkill" />
+        <Key word = "ResetPushingSkill" />
+        <Key word = "GetZeny_Range" />
+        <Key word = "MulticastEffect" />
+        <Key word = "SetExtParamTime" />
+        <Key word = "unused_SetAutoSpellTarget" />
+        <Key word = "unused_SetAutoSpellSelf" />
+        <Key word = "SetReceiveZENY_Kill" />
+        <Key word = "AddCRI_RANGEATK" />
+        <Key word = "SubCRI_RANGEATK" />
+        <Key word = "AddState_RANGEATK" />
+        <Key word = "SubState_RANGEATK" />
+        <Key word = "AddGuildEXP" />
+        <Key word = "SetReceiveItem_Group" />
+        <Key word = "AddReflectMagic" />
+        <Key word = "SubReflectMagic" />
+        <Key word = "ItemCreate" />
+        <Key word = "IsCompleteCombination" />
+        <Key word = "IsBreakCombination" />
+        <Key word = "unused_SetAutoSpell_MLEATKED" />
+        <Key word = "GetRefineLevel" />
+        <Key word = "GetSkillLevel" />
+        <Key word = "GetPureJob" />
+        <Key word = "AddGetItem_Kill" />
+        <Key word = "SubGetItem_Kill" />
+        <Key word = "AddParameterValue" />
+        <Key word = "EvolutionHomun" />
+        <Key word = "AddParamTime" />
+        <Key word = "SubParamTime" />
+        <Key word = "AddDamageTM_Prop" />
+        <Key word = "SubDamageTM_Prop" />
+        <Key word = "Cooking" />
+        <Key word = "SummonNPC" />
+        <Key word = "trace" />
+        <Key word = "v" />
+        <Key word = "lv" />
+        <Key word = "npcv" />
+        <Key word = "IncLocalVar" />
+        <Key word = "DecLocalVar" />
+        <Key word = "SetLocalVar" />
+        <Key word = "GetEquipIsIdentify" />
+        <Key word = "GetEquipRefineryCnt" />
+        <Key word = "GetEquipPercentRefinery" />
+        <Key word = "GetEquipRefineryCost" />
+        <Key word = "GetEquipIsSuccessRefinery" />
+        <Key word = "GetEquipName" />
+        <Key word = "GetEquipItemIdx" />
+        <Key word = "GetEquipWeaponLv" />
+        <Key word = "GetEquipIsEnableRef" />
+        <Key word = "LastNpcName" />
+        <Key word = "PcName" />
+        <Key word = "rand" />
+        <Key word = "lot" />
+        <Key word = "GetPCCount" />
+        <Key word = "guide" />
+        <Key word = "npc" />
+        <Key word = "mob" />
+        <Key word = "warp" />
+        <Key word = "trader" />
+        <Key word = "arenaguide" />
+        <Key word = "hiddenwarp" />
+        <Key word = "effect" />
+        <Key word = "dialog" />
+        <Key word = "putmob" />
+        <Key word = "moveto" />
+        <Key word = "say" />
+        <Key word = "menu" />
+        <Key word = "getgold" />
+        <Key word = "dropgold" />
+        <Key word = "getitem" />
+        <Key word = "dropitem" />
+        <Key word = "setitem" />
+        <Key word = "wait" />
+        <Key word = "close" />
+        <Key word = "hpfullheal" />
+        <Key word = "spfullheal" />
+        <Key word = "hpheal" />
+        <Key word = "spheal" />
+        <Key word = "poisonheal" />
+        <Key word = "stoneeal" />
+        <Key word = "curseheal" />
+        <Key word = "freezingheal" />
+        <Key word = "silenceheal" />
+        <Key word = "confusionheal" />
+        <Key word = "sellitem" />
+        <Key word = "buyitem" />
+        <Key word = "jobchange" />
+        <Key word = "exchange" />
+        <Key word = "error" />
+        <Key word = "checkpoint" />
+        <Key word = "store" />
+        <Key word = "cart" />
+        <Key word = "dlgwrite" />
+        <Key word = "input" />
+        <Key word = "inputstr" />
+        <Key word = "compass" />
+        <Key word = "nude" />
+        <Key word = "showimage" />
+        <Key word = "changepallete" />
+        <Key word = "callmonster" />
+        <Key word = "addskill" />
+        <Key word = "cmdothernpc" />
+        <Key word = "strlocalvar" />
+        <Key word = "InitTimer" />
+        <Key word = "setarenaeventsize" />
+        <Key word = "makewaitingroom" />
+        <Key word = "enablearena" />
+        <Key word = "disablearena" />
+        <Key word = "warpwaitingpctoarena" />
+        <Key word = "resetmymob" />
+        <Key word = "warpallpcinthemap" />
+        <Key word = "broadcastinmap" />
+        <Key word = "stoptimer" />
+        <Key word = "addnpctimer" />
+        <Key word = "subnpctimer" />
+        <Key word = "enablenpc" />
+        <Key word = "disablenpc" />
+        <Key word = "callnpc" />
+        <Key word = "SetFeeZeny" />
+        <Key word = "SetFeeItem" />
+        <Key word = "SetReqLevel" />
+        <Key word = "SetTexJob" />
+        <Key word = "DisableItemMove" />
+        <Key word = "EnableItemMove" />
+        <Key word = "SuccessRefItem" />
+        <Key word = "FailedRefItem" />
+        <Key word = "SetEffectStatus" />
+        <Key word = "ResetStat" />
+        <Key word = "ResetSkill" />
+        <Key word = "menu2" />
+        <Key word = "ShowDigit" />
+        <Key word = "EventAddSkill" />
+        <Key word = "EventDelSkill" />
+        <Key word = "SetParameter" />
+        <Key word = "Emotion" />
+        <Key word = "ChangeSpr" />
+        <Key word = "GetEquipCount" />
+        <Key word = "AgitGet" />
+        <Key word = "AgitGet2" />
+        <Key word = "AgitSet" />
+        <Key word = "AgitFunc" />
+        <Key word = "AgitNpcGet" />
+        <Key word = "AgitNpcSet" />
+        <Key word = "IsGuildMaster" />
+        <Key word = "putmob2" />
+        <Key word = "AgitRegister" />
+        <Key word = "broadcastinmap2" />
+        <Key word = "broadcastserver" />
+        <Key word = "sound" />
+        <Key word = "dlgwritestr" />
+        <Key word = "GetDamagedItemNum" />
+        <Key word = "RepairDamagedItem" />
+        <Key word = "SavePPL" />
+        <Key word = "AgitEmblemFlag" />
+        <Key word = "hpdrain" />
+        <Key word = "spdrain" />
+        <Key word = "getexp" />
+        <Key word = "dropexp" />
+        <Key word = "ServerTime" />
+        <Key word = "GetLocalVarName" />
+        <Key word = "GetMarried" />
+        <Key word = "countdown" />
+        <Key word = "GuildName" />
+        <Key word = "GetNeighborPcNumber" />
+        <Key word = "getnameditem" />
+        <Key word = "dropnameditem" />
+        <Key word = "GetCountOfMyNameItem" />
+        <Key word = "ChangeHairStyle" />
+        <Key word = "ShowEffect" />
+        <Key word = "falcon" />
+        <Key word = "peco" />
+        <Key word = "CheckMaxWeight" />
+        <Key word = "CheckMaxCount" />
+        <Key word = "CheckMaxZeny" />
+        <Key word = "GetMEventZenyName" />
+        <Key word = "GetMEventItemName" />
+        <Key word = "GetMEventZeny" />
+        <Key word = "GetMEventItem" />
+        <Key word = "CreateGuild" />
+        <Key word = "CreateGlobalVar" />
+        <Key word = "GetGlobalVar" />
+        <Key word = "SetGlobalVar" />
+        <Key word = "StrCmp" />
+        <Key word = "StrStr" />
+        <Key word = "UpgradeGuildLevel" />
+        <Key word = "CreateGlobalStr" />
+        <Key word = "GetGlobalStr" />
+        <Key word = "SetGlobalStr" />
+        <Key word = "divorce" />
+        <Key word = "GetTablePoint" />
+        <Key word = "AddTablePoint" />
+        <Key word = "DelTablePoint" />
+        <Key word = "DataMoveToPVP" />
+        <Key word = "GetPVPPoint" />
+        <Key word = "SetPVPPoint" />
+        <Key word = "GetMEventItemID" />
+        <Key word = "getJexp" />
+        <Key word = "dropJexp" />
+        <Key word = "ChkSkill" />
+        <Key word = "GetBODYSTATE" />
+        <Key word = "GetHEALTHSTATE" />
+        <Key word = "UseSkillToPC" />
+        <Key word = "IsBaby" />
+        <Key word = "GetLotto" />
+        <Key word = "SetLotto" />
+        <Key word = "InitLotto" />
+        <Key word = "OpenAuction" />
+        <Key word = "OpenMailing" />
+        <Key word = "StripPC" />
+        <Key word = "PushPC" />
+        <Key word = "ItemDown" />
+        <Key word = "SetNumArray" />
+        <Key word = "GetNumArray" />
+        <Key word = "ShuffleNumbers" />
+        <Key word = "PartyName" />
+        <Key word = "ChangeSpeed" />
+        <Key word = "IsSiegeTime" />
+        <Key word = "ConsumeSpecialItem" />
+        <Key word = "SetItemPartyInMap" />
+        <Key word = "IsHuntingListFull" />
+        <Key word = "FindHuntingList" />
+        <Key word = "AddHuntingList" />
+        <Key word = "DeleteHuntingList" />
+        <Key word = "DisplayHuntingList" />
+        <Key word = "DisplayHuntingList2" />
+        <Key word = "SetHuntingList" />
+        <Key word = "ClearHuntingList" />
+        <Key word = "IsTimeListFull" />
+        <Key word = "FindTimeList" />
+        <Key word = "AddTimeList" />
+        <Key word = "DeleteTimeList" />
+        <Key word = "DisplayTimeList" />
+        <Key word = "SetTimeList" />
+        <Key word = "ClearTimeList" />
+        <Key word = "ChangeCellType" />
+        <Key word = "GetCellType" />
+        <Key word = "IsPcCafe" />
+        <Key word = "GetPayType" />
+        <Key word = "GetConnectionArea" />
+        <Key word = "GetConnectionState" />
+        <Key word = "GetPetEgg" />
+        <Key word = "CashTrader" />
+        <Key word = "CashShop" />
+        <Key word = "AddexpTime" />
+        <Key word = "SubexpTime" />
+        <Key word = "AddReceiveItem" />
+        <Key word = "GetAdvEquipIsSuccessRefinery" />
+        <Key word = "Partycall" />
+        <Key word = "putboss" />
+        <Key word = "UseBossPerception" />
+        <Key word = "SkillToMe" />
+        <Key word = "UseHuntingList" />
+        <Key word = "CheckHuntingList" />
+        <Key word = "item2" />
+        <Key word = "WeaponProperty" />
+        <Key word = "ReadBook" />
+        <Key word = "Mercenary_Summon" />
+        <Key word = "Mercenary_HealHP" />
+        <Key word = "Mercenary_HealSP" />
+        <Key word = "GetMercenaryTotalSummonNum" />
+        <Key word = "GetMercenaryFaith" />
+        <Key word = "SubMercenaryFaith" />
+        <Key word = "AddMercenaryFaith" />
+        <Key word = "npc2" />
+        <Key word = "OnMoveNpcCmd:" />
+        <Key word = "MovePos" />
+        <Key word = "MoveWait" />
+        <Key word = "Refinery" />
+        <Key word = "Mercenary_Condition" />
+        <Key word = "AddNeverknockback" />
+        <Key word = "GetAdvEquipPercentRefinery" />
+        <Key word = "ReLoadMobileEvent" />
+        <Key word = "SetTempTime" />
+        <Key word = "ElapseTempTime" />
+        <Key word = "SubNeverknockback" />
+        <Key word = "GetWeaponClass" />
+        <Key word = "GetEquipSlotAmount" />
+        <Key word = "AddHealValue" />
+        <Key word = "SubHealValue" />
+        <Key word = "unused_SetAutoSpell_MAGATKED" />
+        <Key word = "AddHPAmount_MAGKill" />
+        <Key word = "SubHPAmount_MAGKill" />
+        <Key word = "AddSPAmount_MAGKill" />
+        <Key word = "SubSPAmount_MAGKill" />
+        <Key word = "AddSpellDelay" />
+        <Key word = "SubSpellDelay" />
+        <Key word = "AddSpecificSpellCastTime" />
+        <Key word = "SubSpecificSpellCastTime" />
+        <Key word = "AddMdamage_Race" />
+        <Key word = "SubMdamage_Race" />
+        <Key word = "AddMdamage_Class" />
+        <Key word = "SubMdamage_Class" />
+        <Key word = "SetIgnoreMdefRace" />
+        <Key word = "ResetIgnoreMdefRace" />
+        <Key word = "SetIgnoreMdefClass" />
+        <Key word = "ResetIgnoreMdefClass" />
+        <Key word = "SetHPAmountTime" />
+        <Key word = "ResetHPAmountTime" />
+        <Key word = "SetSPAmountTime" />
+        <Key word = "ResetSPAmountTime" />
+        <Key word = "SetIgnoreDefRace_Percent" />
+        <Key word = "ResetIgnoreDefRace_Percent" />
+        <Key word = "SetIgnoreDefClass_Percent" />
+        <Key word = "ResetIgnoreDefClass_Percent" />
+        <Key word = "GetInventoryRemainCount" />
+        <Key word = "SetAutoWeapon" />
+        <Key word = "ResetAutoWeapon" />
+        <Key word = "SetAutoMweapon" />
+        <Key word = "ResetAutoMweapon" />
+        <Key word = "SetAutoAttacked" />
+        <Key word = "ResetAutoAttacked" />
+        <Key word = "SetAutoMAttacked" />
+        <Key word = "ResetAutoMAttacked" />
+        <Key word = "ResetReceiveItem_Group" />
+        <Key word = "Buff" />
+        <Key word = "SetBuff" />
+        <Key word = "GetBuffValue" />
+        <Key word = "AddHealModifyPercent" />
+        <Key word = "SubHealModifyPercent" />
+        <Key word = "SetHPPercentTime" />
+        <Key word = "ResetHPPercentTime" />
+        <Key word = "SetSPPercentTime" />
+        <Key word = "ResetSPPercentTime" />
+        <Key word = "LoudSpeaker" />
+        <Key word = "SetTargetAttacked_Buff" />
+        <Key word = "ResetTargetAttacked_Buff" />
+        <Key word = "GetMapName" />
+        <Key word = "setquest" />
+        <Key word = "changequest" />
+        <Key word = "erasequest" />
+        <Key word = "completequest" />
+        <Key word = "completequest_between" />
+        <Key word = "recall_completequest" />
+        <Key word = "isbegin_quest" />
+        <Key word = "checkquest_hunting" />
+        <Key word = "checkquest_playtime" />
+        <Key word = "GetLastSiegeMsg" />
+        <Key word = "DataMoveTo_Sakray" />
+        <Key word = "callguardian" />
+        <Key word = "IsPremiumPcCafe" />
+        <Key word = "MD_Subscription" />
+        <Key word = "MD_Enter" />
+        <Key word = "CampCode" />
+        <Key word = "GetCampCode" />
+        <Key word = "CallCampMob" />
+        <Key word = "SetRP2" />
+        <Key word = "MassSetRP2" />
+        <Key word = "PlayerToRP" />
+        <Key word = "GetMEventZenyName_Exculusive" />
+        <Key word = "GetMEventItemName_Exculusive" />
+        <Key word = "GetMEventZeny_Exculusive" />
+        <Key word = "GetMEventItem_Exculusive" />
+        <Key word = "GetMEventItemID_Exculusive" />
+        <Key word = "ReLoadMobileEvent_Exculusive" />
+        <Key word = "MD_List" />
+        <Key word = "MD_Destroy" />
+        <Key word = "PlusCampPoint" />
+        <Key word = "MinusCampPoint" />
+        <Key word = "GetCampPoint" />
+        <Key word = "ResetCampPoint" />
+        <Key word = "CheckSiegeTime" />
+        <Key word = "AddState_MATK" />
+        <Key word = "SubState_MATK" />
+        <Key word = "AddState_MAttacked" />
+        <Key word = "SubState_MAttacked" />
+        <Key word = "GetMDMapName" />
+        <Key word = "GetMDNpcName" />
+        <Key word = "MD_Npc" />
+        <Key word = "MD_Warp" />
+        <Key word = "MD_Hiddenwarp" />
+        <Key word = "MD_Putmob" />
+        <Key word = "Mymobskilluse" />
+        <Key word = "WhereMymobX" />
+        <Key word = "WhereMymobY" />
+        <Key word = "WideMobskilluse" />
+        <Key word = "WideMobskilluse2" />
+        <Key word = "MD_OpenState" />
+        <Key word = "AddHPDrain_100" />
+        <Key word = "SubHPDrain_100" />
+        <Key word = "CreatePackage" />
+        <Key word = "IsBender" />
+        <Key word = "MoveResume" />
+        <Key word = "MoveReturn" />
+        <Key word = "MoveSpeed" />
+        <Key word = "GetNpcPosition" />
+        <Key word = "AddReceiveItem_Equip" />
+        <Key word = "SubReceiveItem_Equip" />
+        <Key word = "AddOnlyJobExpTime" />
+        <Key word = "progress_bar" />
+        <Key word = "MercenaryCheck" />
+        <Key word = "MercenaryType" />
+        <Key word = "IsFreeServer" />
+        <Key word = "SetSkillAutoSpell" />
+        <Key word = "ResetSkillAutoSpell" />
+        <Key word = "SetSkillActivate" />
+        <Key word = "ResetSkillActivate" />
+        <Key word = "GetActivated_Skill" />
+        <Key word = "GetDeactivated_Skill" />
+        <Key word = "AddState_SKID" />
+        <Key word = "SubState_SKID" />
+        <Key word = "SetAutoSpellMagic" />
+        <Key word = "ResetAutoSpellMagic" />
+        <Key word = "run_npc" />
+        <Key word = "run_npctrader" />
+        <Key word = "OnCampCommand:" />
+        <Key word = "check_partyjob" />
+        <Key word = "clearbuff" />
+        <Key word = "check_alive" />
+        <Key word = "kvm_npc" />
+        <Key word = "kvm_start_alivecheck" />
+        <Key word = "pvprankcheck" />
+        <Key word = "unused_SetAutoSpell_MLEATK" />
+        <Key word = "unused_SetAutoSpell_RANGEATK" />
+        <Key word = "kvm_npc_noti" />
+        <Key word = "getarenaeventsize" />
+        <Key word = "SetMakableRuneItemList" />
+        <Key word = "IsSuccessRuneUse" />
+        <Key word = "SetMakableNewPoisonList" />
+        <Key word = "GetItemSocket" />
+        <Key word = "GetPetRelationship" />
+        <Key word = "AddMDamage_Name" />
+        <Key word = "SubMDamage_Name" />
+        <Key word = "GetNonSlotItemSock" />
+        <Key word = "IsEffectStatus" />
+        <Key word = "GetMyMercenary" />
+        <Key word = "ErrorLog" />
+        <Key word = "AddReceiveItem_Name" />
+        <Key word = "SubReceiveItem_Name" />
+        <Key word = "IsMadogear" />
+        <Key word = "SetMadogear" />
+        <Key word = "AddSFCTConsumeAmount" />
+        <Key word = "SubSFCTConsumeAmount" />
+        <Key word = "AddSFCTConsumePermill" />
+        <Key word = "SubSFCTConsumePermill" />
+        <Key word = "AddSFCTEquipAmount" />
+        <Key word = "SubSFCTEquipAmount" />
+        <Key word = "AddSFCTEquipPermill" />
+        <Key word = "SubSFCTEquipPermill" />
+        <Key word = "AddAttrTolerace_Disregard" />
+        <Key word = "SubAttrTolerace_Disregard" />
+        <Key word = "GetExdEquipIsSuccessRefinery" />
+        <Key word = "GetExdAdvEquipIsSuccessRefinery" />
+        <Key word = "DownRefItem" />
+        <Key word = "DownAdvRefItem" />
+        <Key word = "SuccessRandomRefItem" />
+        <Key word = "SuccessRandomAdvRefItem" />
+        <Key word = "FinalBattlePlay" />
+        <Key word = "OnCampCommand2:" />
+        <Key word = "InterOther" />
+        <Key word = "unused_SetAutoSpell_MLEATKED_V2" />
+        <Key word = "unused_SetAutoSpell_RANGEATKED_V2" />
+        <Key word = "AddSkillSP" />
+        <Key word = "SubSkillSP" />
+        <Key word = "AddSkillDelay" />
+        <Key word = "SubSkillDelay" />
+        <Key word = "PlayBGM" />
+        <Key word = "StripPC2" />
+        <Key word = "AddStateCastTime" />
+        <Key word = "SubStateCastTime" />
+        <Key word = "AddSkillMDamage" />
+        <Key word = "SubSkillMDamage" />
+        <Key word = "GetLocation" />
+        <Key word = "BroadcastInZone" />
+        <Key word = "BroadcastInMap" />
+        <Key word = "SetEffect" />
+        <Key word = "ResetEffect" />
+        <Key word = "SetReadyMutationHomun" />
+        <Key word = "MutationHomun" />
+        <Key word = "ModifyMDEF_Fraction" />
+        <Key word = "AddAllDEF_Fluctuation" />
+        <Key word = "SubAllDEF_Fluctuation" />
+        <Key word = "AddAllMDEF_Fluctuation" />
+        <Key word = "SubAllMDEF_Fluctuation" />
+        <Key word = "OpenSearchStoreInfo" />
+        <Key word = "ChangeRP" />
+        <Key word = "IsAllianceGuild" />
+        <Key word = "OpenHour_SiegeMode" />
+        <Key word = "CheckHomunLevel" />
+        <Key word = "CheckHomunMutation" />
+        <Key word = "CheckHomunCall" />
+        <Key word = "SetBattleFieldMovePosition" />
+        <Key word = "GetEquipcompositionType" />
+        <Key word = "GetEquipDBName" />
+        <Key word = "GetEquipcardID" />
+        <Key word = "dropequipitem" />
+        <Key word = "getrefitem" />
+        <Key word = "ResetBuff" />
+        <Key word = "AddState_EFSTATK" />
+        <Key word = "SubState_EFSTATK" />
+        <Key word = "GetNonSlotItemSock2" />
+        <Key word = "getitem2" />
+        <Key word = "ShowScript" />
+        <Key word = "ShowEmotion" />
+        <Key word = "StartCollection" />
+        <Key word = "Montransform" />
+        <Key word = "DeleteAllBodyItem" />
+        <Key word = "OnAgitInvest:" />
+        <Key word = "IncGlobalVar" />
+        <Key word = "DecGlobalVar" />
+        <Key word = "GetAgitInvestMsg" />
+        <Key word = "AddHandicapState_Race" />
+        <Key word = "SubHandicapState_Race" />
+        <Key word = "SetNumDEF_Race" />
+        <Key word = "ResetNumDEF_Race" />
+        <Key word = "SetNumMDEF_Race" />
+        <Key word = "ResetNumMDEF_Race" />
+        <Key word = "SetPerDEF_Self" />
+        <Key word = "SetPerMDEF_Self" />
+        <Key word = "SetMHPPerDamage_Race" />
+        <Key word = "ReSetMHPPerDamage_Race" />
+        <Key word = "SetMSPPerDamage_Race" />
+        <Key word = "ReSetMSPPerDamage_Race" />
+        <Key word = "GetAgitEconomy" />
+        <Key word = "IncAgitEconomy" />
+        <Key word = "DecAgitEconomy" />
+        <Key word = "EQ_Make" />
+        <Key word = "EQ_CheckUser" />
+        <Key word = "EQ_NotifyAdmission" />
+        <Key word = "EQ_IsReady" />
+        <Key word = "EQ_MoveToRoom" />
+        <Key word = "EQ_ReturnToPreSpace" />
+        <Key word = "EQ_MoveToLobby" />
+        <Key word = "Lobby_Make" />
+        <Key word = "Lobby_UserCount" />
+        <Key word = "Lobby_NotifyAdmission" />
+        <Key word = "Lobby_IsReady" />
+        <Key word = "Lobby_MoveToRoom" />
+        <Key word = "Lobby_ReturnToPreSpace" />
+        <Key word = "Lobby_Init" />
+        <Key word = "clear" />
+        <Key word = "Navigation_Active" />
+        <Key word = "Active_Montransform" />
+        <Key word = "DeActive_Montransform" />
+        <Key word = "SetAutoSpell2" />
+        <Key word = "SetAutoSpell2_MLEATKED" />
+        <Key word = "SetAutoSpell2_MLEATKED_Short" />
+        <Key word = "SetAutoSpell2_MLEATKED_Long" />
+        <Key word = "SetAutoSpell2_MAGATKED" />
+        <Key word = "SetAutoSpell2_MLEATK" />
+        <Key word = "SetAutoSpell2_RANGEATK" />
+        <Key word = "ResetAutoSpell2" />
+        <Key word = "ResetAutoSpell2_MLEATKED" />
+        <Key word = "ResetAutoSpell2_MLEATKED_Short" />
+        <Key word = "ResetAutoSpell2_MLEATKED_Long" />
+        <Key word = "ResetAutoSpell2_MAGATKED" />
+        <Key word = "ResetAutoSpell2_MLEATK" />
+        <Key word = "ResetAutoSpell2_RANGEATK" />
+        <Key word = "PauseAutoSpell2" />
+        <Key word = "PauseAutoSpell2_MLEATKED" />
+        <Key word = "PauseAutoSpell2_MLEATKED_Short" />
+        <Key word = "PauseAutoSpell2_MLEATKED_Long" />
+        <Key word = "PauseAutoSpell2_MAGATKED" />
+        <Key word = "PauseAutoSpell2_MLEATK" />
+        <Key word = "PauseAutoSpell2_RANGEATK" />
+        <Key word = "ResumeAutoSpell2" />
+        <Key word = "ResumeAutoSpell2_MLEATKED" />
+        <Key word = "ResumeAutoSpell2_MLEATKED_Short" />
+        <Key word = "ResumeAutoSpell2_MLEATKED_Long" />
+        <Key word = "ResumeAutoSpell2_MAGATKED" />
+        <Key word = "ResumeAutoSpell2_MLEATK" />
+        <Key word = "ResumeAutoSpell2_RANGEATK" />
+        <Key word = "CheckJobGroup" />
+        <Key word = "GetPremiumCampaign_Grade" />
+        <Key word = "GetBaseJob" />
+        <Key word = "GetCategoryJob" />
+        <Key word = "EQ_JobControl" />
+        <Key word = "AddMDamage_Property" />
+        <Key word = "SubMDamage_Property" />
+        <Key word = "Lobby_CampCode" />
+        <Key word = "InsertAliveMember" />
+        <Key word = "EQ_UserInfo_Init" />
+        <Key word = "AddQuestInfo" />
+        <Key word = "AddQuestInfo2" />
+        <Key word = "SetQuestJob" />
+        <Key word = "SetQuestSex" />
+        <Key word = "SetQuestLevel" />
+        <Key word = "SetQuestJobLevel" />
+        <Key word = "SetQuestItem" />
+        <Key word = "SetQuestHomunLevel" />
+        <Key word = "SetQuestHomunType" />
+        <Key word = "SetQuestQuestItem" />
+        <Key word = "IsSetQuest" />
+        <Key word = "IsLowLevelSiegeJob" />
+        <Key word = "ResetBuffLowLevelSiege" />
+        <Key word = "EQ_MoveToLobbyJobMatching" />
+        <Key word = "GetYear" />
+        <Key word = "GetMonth" />
+        <Key word = "GetDay" />
+        <Key word = "GetWeekDay" />
+        <Key word = "MergeItem" />
+        <Key word = "dialog2" />
+        <Key word = "wait2" />
+        <Key word = "store_V2" />
+        <Key word = "CallFalcon" />
+        <Key word = "SetPRNpcWinner" />
+        <Key word = "PD_SubScription" />
+        <Key word = "PD_Enter" />
+        <Key word = "SetQuestQuest" />
+        <Key word = "TalkShow" />
+        <Key word = "RentItem" />
+        <Key word = "ProvideExp" />
+        <Key word = "GetMonsterHP" />
+        <Key word = "MonsterTalkShow" />
+        <Key word = "CheckJobGroup2" />
+        <Key word = "JoinClan" />
+        <Key word = "LeaveClan" />
+        <Key word = "SetMonsterHP" />
+        <Key word = "ItemDown2" />
+        <Key word = "GetElapsedTimer" />
+        <Key word = "IsEnableNpc" />
+        <Key word = "GetNpcMonster_X" />
+        <Key word = "GetNpcMonster_Y" />
+        <Key word = "DelayTime" />
+        <Key word = "SetClanMaster" />
+        <Key word = "SavePosition" />
+        <Key word = "MovotoSavePosition" />
+			</KeyWords>
+		</RuleSet>
+			
+		<RuleSet name ="TestSet" ignorecase = "true">
+			<Delimiters>~!@%^*()-+=|\#/{}[]:;"'&lt;&gt; , .?</Delimiters>
+			<KeyWords name ="Testword" bold="true" italic = "true" color = "Red">
+				<Key word = "TODO" />
+			</KeyWords>
+		</RuleSet>
+		
+		<RuleSet name ="DocumentSet" ignorecase = "false">
+			<Delimiters>~!@%^*()-+=|\#/{}[]:;"'&lt;&gt; , .?</Delimiters>
+			
+			<Span name ="XMLTAG" rule = "XMLDocuSet" bold ="false" italic ="true" color ="Gray" stopateol ="true">
+				<Begin>&lt;</Begin>
+				<End>&gt;</End>
+			</Span>
+			
+			<KeyWords name ="Testword" bold="true" italic = "true" color = "Red">
+				<Key word = "TODO" />
+			</KeyWords>
+		</RuleSet>
+		
+		<RuleSet name ="XMLDocuSet" ignorecase = "false">
+			<Delimiters>~!@%^*()-+=|\#/{}[]:;"'&lt;&gt; , .?</Delimiters>
+		
+			<Span name ="STRING" bold ="true" italic ="true" color ="Silver" stopateol ="true">
+				<Begin>"</Begin>
+				<End>"</End>
+			</Span>
+		
+		
+			<KeyWords name ="Punctuation" bold ="true" italic ="true" color ="Gray">
+				<Key word = "/" />
+				<Key word = "|" />
+				<Key word = "=" />
+			</KeyWords>
+		</RuleSet>
+	</RuleSets>
+</SyntaxDefinition>
+

@@ -1,0 +1,14 @@
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\bin\Release\RagnarokNpcEditor.exe.config
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\bin\Release\RagnarokNpcEditor.exe
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\bin\Release\RagnarokNpcEditor.pdb
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\bin\Release\ICSharpCode.TextEditor.dll
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\bin\Release\WeifenLuo.WinFormsUI.Docking.dll
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\obj\x86\Release\RagnarokNpcEditor.NPCList.resources
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\obj\x86\Release\RagnarokNpcEditor.MainForm.resources
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\obj\x86\Release\RagnarokNpcEditor.Properties.Resources.resources
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\obj\x86\Release\RagnarokNpcEditor.ScriptFile.resources
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\obj\x86\Release\RagnarokNpcEditor.exe
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\obj\x86\Release\RagnarokNpcEditor.pdb
