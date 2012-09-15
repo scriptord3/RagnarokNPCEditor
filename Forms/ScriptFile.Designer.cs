@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScriptFile));
             this.txtCode = new ICSharpCode.TextEditor.TextEditorControl();
+            this.AutoCompleteImageList = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
             // txtCode
@@ -43,8 +45,15 @@
             this.txtCode.Size = new System.Drawing.Size(472, 408);
             this.txtCode.TabIndent = 2;
             this.txtCode.TabIndex = 0;
-            this.txtCode.TextChanged += new System.EventHandler(this.txtCode_TextChanged);
-            this.txtCode.Load += new System.EventHandler(this.txtCode_Load);
+            // 
+            // AutoCompleteImageList
+            // 
+            this.AutoCompleteImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("AutoCompleteImageList.ImageStream")));
+            this.AutoCompleteImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.AutoCompleteImageList.Images.SetKeyName(0, "function.png");
+            this.AutoCompleteImageList.Images.SetKeyName(1, "poring.gif");
+            this.AutoCompleteImageList.Images.SetKeyName(2, "item.png");
+            this.AutoCompleteImageList.Images.SetKeyName(3, "391.png");
             // 
             // ScriptFile
             // 
@@ -57,7 +66,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ScriptFile";
             this.Text = "ScriptFile";
-            this.Load += new System.EventHandler(this.ScriptFile_Load);
             this.ResumeLayout(false);
 
         }
@@ -65,5 +73,6 @@
         #endregion
 
         private ICSharpCode.TextEditor.TextEditorControl txtCode;
+        public System.Windows.Forms.ImageList AutoCompleteImageList;
     }
 }

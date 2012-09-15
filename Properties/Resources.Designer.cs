@@ -81,6 +81,13 @@ namespace RagnarokNpcEditor.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap indent {
+            get {
+                object obj = ResourceManager.GetObject("indent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap kr {
             get {
                 object obj = ResourceManager.GetObject("kr", resourceCulture);
@@ -99,6 +106,13 @@ namespace RagnarokNpcEditor.Properties {
         internal static string SyntaxModes {
             get {
                 return ResourceManager.GetString("SyntaxModes", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap th {
+            get {
+                object obj = ResourceManager.GetObject("th", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

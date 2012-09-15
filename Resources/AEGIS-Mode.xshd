@@ -58,7 +58,8 @@
 				<Key word = "choose" />
 				<Key word = "endchoose" />
 				<Key word = "case" />
-				<Key word = "endif" />
+        <Key word = "break" />
+        <Key word = "endif" />
 				<Key word = "elseif" />
 			</KeyWords>
 			
@@ -84,15 +85,15 @@
 			</KeyWords>
 			
 			<KeyWords name ="AccessModifiers" bold="true" italic = "false" color = "Blue">
-        <Key word = "OnInit:" />
-        <Key word = "OnClick:" />
-        <Key word = "OnTouch:" />
-        <Key word = "OnMyMobDead:" />
-        <Key word = "OnTimer:" />
-        <Key word = "OnCommand:" />
-        <Key word = "OnStartArena:" />
-        <Key word = "OnTouchNPC:" />
-        <Key word = "OnTouch2:" />
+        <Key word = "OnInit" />
+        <Key word = "OnClick" />
+        <Key word = "OnTouch" />
+        <Key word = "OnMyMobDead" />
+        <Key word = "OnTimer" />
+        <Key word = "OnCommand" />
+        <Key word = "OnStartArena" />
+        <Key word = "OnTouchNPC" />
+        <Key word = "OnTouch2" />
 			</KeyWords>
 			
 			<KeyWords name ="GetSet" bold="false" italic = "false" color = "SaddleBrown">

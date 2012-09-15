@@ -10,10 +10,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using RagnarokNpcEditor.Classes;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace RagnarokNpcEditor
 {
-    public partial class NPCList : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class NPCList : DockContent
     {
         public NPCList()
         {

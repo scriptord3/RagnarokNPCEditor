@@ -22,16 +22,75 @@ namespace RagnarokNpcEditor
 
         public ScriptFile ActiveDocument;
         public NPCList NpcList;
+        private MRUManager _mruManager;
+
+        public List<AEGISCompletionData> AutoCompleteObjects;
 
         public MainForm()
         {
             InitializeComponent();
             Singleton = this;
 
+            this.Location = Properties.Settings.Default.Location;
+            if (!Properties.Settings.Default.Size.IsEmpty)
+                this.Size = Properties.Settings.Default.Size;
+
+            _mruManager = new MRUManager(mRUToolStripMenuItem, mruManager_MruOpenEvent);
+            _mruManager.RegistryKeyName = "Ragnarok NPC Editor";
+            _mruManager.LoadFromRegistry();
+
             this.Text = "Ragnarok NPC Editor v" + Config.GetVersion + " (beta)";
 
             NpcList = new NPCList();
             NpcList.Show(dockPanel, DockState.DockLeft);
+
+            FillAutoCompleteList();
+        }
+
+        private void FillAutoCompleteList()
+        {
+            AutoCompleteObjects = new List<AEGISCompletionData>();
+
+            // itp.def
+            foreach (var kvp in ReadDefList("itp.def"))
+                AutoCompleteObjects.Add(new AEGISCompletionData(kvp.Value, kvp.Value, (int)AutoCompletionImageType.Item, ""));
+
+            // mobname.def
+            foreach (var kvp in ReadDefList("mobname.def"))
+                AutoCompleteObjects.Add(new AEGISCompletionData(kvp.Value, kvp.Value, (int)AutoCompletionImageType.Monster, ""));
+
+            // skill.def
+            foreach (var kvp in ReadDefList("skill.def"))
+                AutoCompleteObjects.Add(new AEGISCompletionData(kvp.Value, kvp.Value, (int)AutoCompletionImageType.Skill, ""));
+
+            // std.def
+            foreach (var kvp in ReadDefList("std.def"))
+                AutoCompleteObjects.Add(new AEGISCompletionData(kvp.Value, kvp.Value, (int)AutoCompletionImageType.Script, ""));
+        }
+
+        private KeyValuePair<int, string>[] ReadDefList(string filename)
+        {
+            var ret = new List<KeyValuePair<int, string>>();
+            var fi = new FileInfo(Path.Combine("Data", filename));
+            if (fi.Exists)
+            {
+                using (var fs = new FileStream(fi.FullName, FileMode.Open))
+                {
+                    using (var sr = new StreamReader(fs))
+                    {
+                        while (true)
+                        {
+                            var line = sr.ReadLine();
+                            if (line == null) break;
+                            if (string.IsNullOrWhiteSpace(line)) continue;
+
+                            var data = line.Split(Convert.ToChar(" "));
+                            ret.Add(new KeyValuePair<int, string>(Convert.ToInt32(data[1]), data[0]));
+                        }
+                    }
+                }
+            }
+            return ret.ToArray();
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -50,17 +109,28 @@ namespace RagnarokNpcEditor
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 Properties.Settings.Default.LastFolder = System.IO.Path.GetDirectoryName(openFileDialog.FileName);
-                var f = new ScriptFile();
-                f.LoadFile(openFileDialog.FileName);
-                f.MdiParent = this;
-                f.Show(dockPanel);
+                LoadFile(openFileDialog.FileName);
             }
+        }
+
+        private void mruManager_MruOpenEvent(int number, string filename)
+        {
+            LoadFile(filename);
+        }
+
+        private void LoadFile(string filename)
+        {
+            _mruManager.AddFile(filename);
+            var f = new ScriptFile();
+            f.LoadFile(filename);
+            f.MdiParent = this;
+            f.Show(dockPanel);
         }
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ActiveDocument != null)
-                ActiveDocument.SaveAsFile();            
+                ActiveDocument.SaveAsFile();
         }
 
         private void saveToolStripButton_Click(object sender, EventArgs e)
@@ -138,11 +208,6 @@ namespace RagnarokNpcEditor
             }
         }
 
-        private void toolStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
         private void dockPanel_ActiveContentChanged(object sender, EventArgs e)
         {
             lock (NpcList)
@@ -153,49 +218,29 @@ namespace RagnarokNpcEditor
             }
         }
 
-        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripButton3_Click(object sender, EventArgs e)
-        {
-            ChangeEncoding("EUC-KR");
-        }
-
-        private void koreanToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ChangeEncoding("EUC-KR");
-        }
-
-        private void toolStripButton5_Click(object sender, EventArgs e)
-        {
-            ChangeEncoding("BIG5");
-        }
-
-        private void chineseBig5ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ChangeEncoding("BIG5");
-        }
-
-        private void toolStripButton4_Click(object sender, EventArgs e)
+        private void ChangeEncodingDefault(object sender, EventArgs e)
         {
             ChangeEncoding("ISO-8859-1");
         }
 
-        private void defaultToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ChangeEncodingKorean(object sender, EventArgs e)
         {
-            ChangeEncoding("ISO-8859-1");
+            ChangeEncoding("EUC-KR");
         }
 
-        private void toolStripButton6_Click(object sender, EventArgs e)
+        private void ChangeEncodingTaiwan(object sender, EventArgs e)
+        {
+            ChangeEncoding("BIG5");
+        }
+
+        private void ChangeEncodingChina(object sender, EventArgs e)
         {
             ChangeEncoding("GBK");
         }
 
-        private void chineseToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ChangeEncodingThai(object sender, EventArgs e)
         {
-            ChangeEncoding("GBK");
+            ChangeEncoding("Windows-874");
         }
 
         private void ChangeEncoding(string encoding)
@@ -213,6 +258,20 @@ namespace RagnarokNpcEditor
                 ActiveDocument = null;
                 NpcList.ClearList();
             }
+        }
+
+        private void toolStripButton8_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument == null) return;
+            ActiveDocument.Indent();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.Location = this.Location;
+            Properties.Settings.Default.Size = this.Size;
+            Properties.Settings.Default.Save();
+            _mruManager.SaveToRegistry();
         }
     }
 }

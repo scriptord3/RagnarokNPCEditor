@@ -38,9 +38,11 @@
     <ApplicationIcon>poring.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.TextEditor, Version=3.1.0.4977, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Depends\ICSharpCode.TextEditor.dll</HintPath>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>Depends\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpDevelop.Dom">
+      <HintPath>Depends\ICSharpCode.SharpDevelop.Dom.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,14 +54,17 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.7.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
-      <HintPath>Depends\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSyntaxModeProvider.cs" />
+    <Compile Include="Classes\AEGISCompletionData.cs" />
+    <Compile Include="Classes\CodeCompletionKeyHandler.cs" />
+    <Compile Include="Classes\CodeCompletionProvider.cs" />
     <Compile Include="Classes\Config.cs" />
+    <Compile Include="Classes\MRUManager.cs" />
     <Compile Include="Classes\NpcScriptLocation.cs" />
+    <Compile Include="Classes\ScriptIdenter.cs" />
+    <Compile Include="Enum.cs" />
     <Compile Include="Forms\NPCList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,11 +123,35 @@
     <None Include="res\compile.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\itp.def">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\mobname.def">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\skill.def">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\std.def">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="poring.ico" />
+    <None Include="Resources\indent.png" />
+    <None Include="Resources\th.png" />
     <None Include="res\cn.png" />
     <None Include="res\tw.png" />
     <None Include="res\us.png" />
     <None Include="res\kr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Depends\Docking\WinFormsUI.csproj">
+      <Project>{C75532C4-765B-418E-B09B-46D36B2ABDB1}</Project>
+      <Name>WinFormsUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\Texteditor\Src\ICSharpCode.TextEditor\Project\ICSharpCode.TextEditor.csproj">
+      <Project>{2D18BE89-D210-49EB-A9DD-2246FBB3DF6D}</Project>
+      <Name>ICSharpCode.TextEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

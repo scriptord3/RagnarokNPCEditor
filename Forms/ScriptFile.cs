@@ -13,6 +13,7 @@ using System.IO;
 using RagnarokNpcEditor.Classes;
 using System.Windows.Forms;
 using ICSharpCode.TextEditor.Document;
+using ICSharpCode.TextEditor.Gui.CompletionWindow;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace RagnarokNpcEditor
@@ -20,23 +21,35 @@ namespace RagnarokNpcEditor
     public partial class ScriptFile : DockContent
     {
         public List<NpcScriptLocation> Npcs;
+        private CodeCompletionWindow codeCompletionWindow;
 
         private string _filename = string.Empty;
         private string _text = string.Empty;
         private Encoding _encoding = System.Text.Encoding.GetEncoding("ISO-8859-1");
-        private bool _hasChanges;
+        private bool _hasChanges = false;
 
         public ScriptFile()
         {
             InitializeComponent();
             Npcs = new List<NpcScriptLocation>();
-            //ICSharpCode.TextEditor.Document.FileSyntaxModeProvider fsmProvider;
-            //fsmProvider = new ICSharpCode.TextEditor.Document.FileSyntaxModeProvider(Directory.GetCurrentDirectory());
-            //ICSharpCode.TextEditor.Document.HighlightingManager.Manager.AddSyntaxModeFileProvider(fsmProvider);
             ICSharpCode.TextEditor.Document.HighlightingManager.Manager.AddSyntaxModeFileProvider(new AppSyntaxModeProvider());
             txtCode.SetHighlighting("AEGIS");
             txtCode.Document.FoldingManager.FoldingStrategy = new RegionFoldingStrategy();
+            txtCode.Document.DocumentChanged += txtCode_TextChanged;
+            CodeCompletionKeyHandler.Attach(this, txtCode);
             txtCode.IsReadOnly = false;
+        }
+
+        private string GetLastWord()
+        {
+            var search = string.Empty;
+            for (var i = txtCode.Document.PositionToOffset(txtCode.ActiveTextAreaControl.Caret.Position) - 1; i >= 0; i--)
+            {
+                var c = txtCode.Document.GetCharAt(i);
+                if (string.IsNullOrWhiteSpace(c.ToString())) break;
+                search = c + search;
+            }
+            return search;
         }
 
         public void NavigateToLine(int index)
@@ -57,6 +70,7 @@ namespace RagnarokNpcEditor
                     using (var sr = new StreamReader(fs, System.Text.Encoding.GetEncoding("ISO-8859-1")))
                     {
                         var file = sr.ReadToEnd();
+                        file = file.Replace("\r\n", "\n").Replace("\r", "\n").Replace("\n", "\r\n");
                         _text = file;
                         txtCode.Text = _text;
                         this.Text = Path.GetFileName(_filename);
@@ -77,6 +91,34 @@ namespace RagnarokNpcEditor
         }
 
 
+        private void ShowIntellisense()
+        {
+            ICompletionDataProvider completionDataProvider = new CodeCompletionProvider(this.AutoCompleteImageList);
+
+            var x = CodeCompletionWindow.ShowCompletionWindow(
+                this,                // The parent window for the completion window
+                txtCode, 	     // The text editor to show the window for
+                "",	       	     // Filename - will be passed back to the provider
+                completionDataProvider,// Provider to get the list of possible completions
+                ' '		     // Key pressed - will be passed to the provider
+                );
+
+            if (codeCompletionWindow != null)
+            {
+                // ShowCompletionWindow can return null when the provider returns an empty list
+                codeCompletionWindow.Closed += new EventHandler(CloseCodeCompletionWindow);
+            }
+        }
+
+        void CloseCodeCompletionWindow(object sender, EventArgs e)
+        {
+            if (codeCompletionWindow != null)
+            {
+                codeCompletionWindow.Closed -= new EventHandler(CloseCodeCompletionWindow);
+                codeCompletionWindow.Dispose();
+                codeCompletionWindow = null;
+            }
+        }
 
         public void SaveFile()
         {
@@ -93,10 +135,11 @@ namespace RagnarokNpcEditor
                 {
                     using (var sw = new StreamWriter(fs, _encoding))
                     {
-                        sw.Write(txtCode.Text);
+                        sw.Write(txtCode.Text.Replace("\t", "  ").Replace("\r\n", "\n").Replace("\r", "\n").Replace("\n", "\r\n"));
                     }
                 }
                 _hasChanges = false;
+                txtCode.Document.FoldingManager.UpdateFoldings(null, null);
                 this.Text = Path.GetFileName(_filename);
             }
             catch (Exception ex)
@@ -163,6 +206,16 @@ namespace RagnarokNpcEditor
             _encoding = encoding;
             txtCode.Text = _encoding.GetString(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(_text));
             LoadNpcs();
+            txtCode.Document.FoldingManager.UpdateFoldings(null, null);
+        }
+
+        public void Indent()
+        {
+            _text = System.Text.Encoding.GetEncoding("ISO-8859-1").GetString(_encoding.GetBytes(txtCode.Text));
+            _text = ScriptIdenter.Ident(_text);
+            txtCode.Text = _encoding.GetString(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(_text));
+            LoadNpcs();
+            txtCode.Document.FoldingManager.UpdateFoldings(null, null);
         }
 
         private void LoadNpcs()
@@ -178,20 +231,11 @@ namespace RagnarokNpcEditor
             MainForm.Singleton.NpcList.NpcsChanged(Npcs);
         }
 
-        private void ScriptFile_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtCode_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtCode_TextChanged(object sender, EventArgs e)
         {
             _hasChanges = true;
             this.Text = Path.GetFileName(_filename) + "*";
+            txtCode.Document.FoldingManager.UpdateFoldings(null, null);
         }
     }
 
@@ -230,7 +274,7 @@ namespace RagnarokNpcEditor
                 //{
                 string text = document.GetText(offs, seg.Length - spaceCount);
 
-                if (text.StartsWith("On") || text.StartsWith("if") || text.StartsWith("choose") || text.StartsWith("case"))
+                if (text.StartsWith("OnTimer") || text.StartsWith("if") || text.StartsWith("choose") || text.StartsWith("case"))
                     startLines.Push(i);
 
                 if ((text.StartsWith("return") || text.StartsWith("endif") || text.StartsWith("endchoose") || text.StartsWith("break")) && startLines.Count > 0)
@@ -239,7 +283,7 @@ namespace RagnarokNpcEditor
                     int start = startLines.Pop();
                     list.Add(new FoldMarker(document, start,
                         document.GetLineSegment(start).Length,
-                        i, spaceCount + "return".Length));
+                        i, spaceCount + text.Length));
                 }
                 //}
             }
