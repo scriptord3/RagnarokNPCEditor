@@ -39,6 +39,7 @@
             this.txtCode.ConvertTabsToSpaces = true;
             this.txtCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCode.IsReadOnly = false;
+            this.txtCode.LineViewerStyle = ICSharpCode.TextEditor.Document.LineViewerStyle.FullRow;
             this.txtCode.Location = new System.Drawing.Point(0, 0);
             this.txtCode.Name = "txtCode";
             this.txtCode.ShowVRuler = false;

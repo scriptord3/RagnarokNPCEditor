@@ -1,0 +1,10 @@
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\Depends\Docking\bin\Debug\license.txt
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\Depends\Docking\bin\Debug\WeifenLuo.WinFormsUI.Docking.dll
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\Depends\Docking\bin\Debug\WeifenLuo.WinFormsUI.Docking.pdb
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\Depends\Docking\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\Depends\Docking\obj\Debug\WeifenLuo.WinFormsUI.Docking.Resources.resources
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\Depends\Docking\obj\Debug\WeifenLuo.WinFormsUI.Docking.Strings.resources
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\Depends\Docking\obj\Debug\ResGen.read.1.tlog
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\Depends\Docking\obj\Debug\ResGen.write.1.tlog
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\Depends\Docking\obj\Debug\WeifenLuo.WinFormsUI.Docking.dll
+C:\Users\mrdiablo\Documents\GitHub\RagnarokNPCEditor\Depends\Docking\obj\Debug\WeifenLuo.WinFormsUI.Docking.pdb

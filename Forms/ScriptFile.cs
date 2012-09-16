@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using RagnarokNpcEditor.Classes;
 using System.Windows.Forms;
+using ICSharpCode.TextEditor;
 using ICSharpCode.TextEditor.Document;
 using ICSharpCode.TextEditor.Gui.CompletionWindow;
 using WeifenLuo.WinFormsUI.Docking;
@@ -218,6 +220,38 @@ namespace RagnarokNpcEditor
             txtCode.Document.FoldingManager.UpdateFoldings(null, null);
         }
 
+        public void Compile()
+        {
+            if (CheckForMissingQuotes())
+                MessageBox.Show("Compilation successful.", "Compiler", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private bool CheckForMissingQuotes()
+        {
+            for (int i = 0; i < txtCode.Document.TotalNumberOfLines; i++)
+            {
+                var seg = txtCode.Document.GetLineSegment(i);
+                int offs, end = txtCode.Document.TextLength;
+                char c;
+                for (offs = seg.Offset; offs < end && ((c = txtCode.Document.GetCharAt(offs)) == ' ' || c == '\t'); offs++)
+                { }
+                if (offs == end)
+                    break;
+                int spaceCount = offs - seg.Offset;
+                string text = txtCode.Document.GetText(offs, seg.Length - spaceCount);
+                var amount = text.Count(f => f == '"');
+                //Debug.Print("{0}", amount % 2);
+                if (amount % 2 == 1)
+                {
+                    MessageBox.Show(string.Format("Incorrect number of quotes (\") on line {0}", i + 1), "Compiler", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    txtCode.ActiveTextAreaControl.Caret.Position = new TextLocation(txtCode.ActiveTextAreaControl.Caret.Position.X, i);
+                    txtCode.ActiveTextAreaControl.ScrollToCaret();
+                    return false;
+                }
+            }
+            return true;
+        }
+
         private void LoadNpcs()
         {
             Npcs.Clear();
@@ -255,7 +289,7 @@ namespace RagnarokNpcEditor
         {
             List<FoldMarker> list = new List<FoldMarker>();
 
-            Stack<int> startLines = new Stack<int>();
+            Stack<Tuple<int, string>> startLines = new Stack<Tuple<int, string>>();
 
             // Create foldmarkers for the whole document, enumerate through every line.
             for (int i = 0; i < document.TotalNumberOfLines; i++)
@@ -275,14 +309,44 @@ namespace RagnarokNpcEditor
                 string text = document.GetText(offs, seg.Length - spaceCount);
 
                 if (text.StartsWith("OnTimer") || text.StartsWith("if") || text.StartsWith("choose") || text.StartsWith("case"))
-                    startLines.Push(i);
+                    startLines.Push(new Tuple<int, string>(i, text));
 
                 if ((text.StartsWith("return") || text.StartsWith("endif") || text.StartsWith("endchoose") || text.StartsWith("break")) && startLines.Count > 0)
                 {
-                    // Add a new FoldMarker to the list.
-                    int start = startLines.Pop();
-                    list.Add(new FoldMarker(document, start,
-                        document.GetLineSegment(start).Length,
+                    Tuple<int, string> start = startLines.Pop();
+                    switch (text)
+                    {
+                        case "endif":
+                            if (!start.Item2.StartsWith("if"))
+                            {
+                                startLines.Push(start);
+                                continue;
+                            }
+                            break;
+                        case "endchoose":
+                            if (!start.Item2.StartsWith("choose"))
+                            {
+                                startLines.Push(start);
+                                continue;
+                            }
+                            break;
+                        case "break":
+                            if (!start.Item2.StartsWith("case"))
+                            {
+                                startLines.Push(start);
+                                continue;
+                            }
+                            break;
+                        default:
+                            if (start.Item2.StartsWith("if") || start.Item2.StartsWith("choose") || start.Item2.StartsWith("case"))
+                            {
+                                startLines.Push(start);
+                                continue;
+                            }
+                            break;
+                    }
+                    list.Add(new FoldMarker(document, start.Item1,
+                        document.GetLineSegment(start.Item1).Length,
                         i, spaceCount + text.Length));
                 }
                 //}

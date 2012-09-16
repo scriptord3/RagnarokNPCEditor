@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Xml;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using RagnarokNpcEditor.Classes;
@@ -53,19 +55,39 @@ namespace RagnarokNpcEditor
 
             // itp.def
             foreach (var kvp in ReadDefList("itp.def"))
-                AutoCompleteObjects.Add(new AEGISCompletionData(kvp.Value, kvp.Value, (int)AutoCompletionImageType.Item, ""));
+                AutoCompleteObjects.Add(new AEGISCompletionData(kvp.Value, kvp.Value, (int)AutoCompletionImageType.Item, "", AEGISCompletionData.eType.Intellisense));
 
             // mobname.def
             foreach (var kvp in ReadDefList("mobname.def"))
-                AutoCompleteObjects.Add(new AEGISCompletionData(kvp.Value, kvp.Value, (int)AutoCompletionImageType.Monster, ""));
+                AutoCompleteObjects.Add(new AEGISCompletionData(kvp.Value, kvp.Value, (int)AutoCompletionImageType.Monster, "", AEGISCompletionData.eType.Intellisense));
 
             // skill.def
             foreach (var kvp in ReadDefList("skill.def"))
-                AutoCompleteObjects.Add(new AEGISCompletionData(kvp.Value, kvp.Value, (int)AutoCompletionImageType.Skill, ""));
+                AutoCompleteObjects.Add(new AEGISCompletionData(kvp.Value, kvp.Value, (int)AutoCompletionImageType.Skill, "", AEGISCompletionData.eType.Intellisense));
 
             // std.def
             foreach (var kvp in ReadDefList("std.def"))
-                AutoCompleteObjects.Add(new AEGISCompletionData(kvp.Value, kvp.Value, (int)AutoCompletionImageType.Script, ""));
+                AutoCompleteObjects.Add(new AEGISCompletionData(kvp.Value, kvp.Value, (int)AutoCompletionImageType.Script, "", AEGISCompletionData.eType.Intellisense));
+
+            ReadSnippets();
+        }
+
+        private void ReadSnippets()
+        {
+            var fi = new FileInfo(Path.Combine("Data", "Snippets.xml"));
+            if (fi.Exists)
+            {
+                XmlDocument xd = new XmlDocument();
+                xd.Load(fi.FullName);
+
+                XmlNodeList snippets = xd.SelectNodes("/snippets/snippet");
+                foreach (XmlNode snippet in snippets)
+                {
+                    var key = snippet.Attributes.GetNamedItem("key").Value;
+                    var data = snippet.InnerText;
+                    AutoCompleteObjects.Add(new AEGISCompletionData(key, data, (int)AutoCompletionImageType.Script, "", AEGISCompletionData.eType.Snippet));
+                }
+            }
         }
 
         private KeyValuePair<int, string>[] ReadDefList(string filename)
@@ -272,6 +294,12 @@ namespace RagnarokNpcEditor
             Properties.Settings.Default.Size = this.Size;
             Properties.Settings.Default.Save();
             _mruManager.SaveToRegistry();
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument == null) return;
+            ActiveDocument.Compile();
         }
     }
 }

@@ -64,6 +64,7 @@
     <Compile Include="Classes\MRUManager.cs" />
     <Compile Include="Classes\NpcScriptLocation.cs" />
     <Compile Include="Classes\ScriptIdenter.cs" />
+    <Compile Include="Classes\SnippetDataProvider.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="Forms\NPCList.cs">
       <SubType>Form</SubType>
@@ -130,6 +131,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\skill.def">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Snippets.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\std.def">

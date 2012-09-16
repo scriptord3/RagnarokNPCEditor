@@ -10,11 +10,11 @@ using ICSharpCode.TextEditor.Gui.CompletionWindow;
 
 namespace RagnarokNpcEditor.Classes
 {
-    public class CodeCompletionProvider : ICompletionDataProvider
+    public class SnippetDataProvider : ICompletionDataProvider
     {
         private ImageList imageList;
 
-        public CodeCompletionProvider(ImageList imageList)
+        public SnippetDataProvider(ImageList imageList)
         {
             this.imageList = imageList;
         }
@@ -58,14 +58,14 @@ namespace RagnarokNpcEditor.Classes
         public bool InsertAction(ICompletionData data, TextArea textArea, int insertionOffset, char key)
         {
             textArea.SelectionManager.SetSelection(textArea.Document.OffsetToPosition(
-                Math.Min(insertionOffset - ((AEGISCompletionData)data).Expression.Length, textArea.Document.TextLength)
+                Math.Min(insertionOffset - ((AEGISCompletionData)data).Expression.Length - 1, textArea.Document.TextLength)
                 ), textArea.Caret.Position);
             return data.InsertAction(textArea, key);
         }
 
         public ICompletionData[] GenerateCompletionData(string fileName, TextArea textArea, char charTyped)
         {
-            var expr = charTyped.ToString();
+            var expr = string.Empty;
             for (var i = textArea.Document.PositionToOffset(textArea.Caret.Position) - 1; i >= 0; i--)
             {
                 var c = textArea.Document.GetCharAt(i);
@@ -74,7 +74,7 @@ namespace RagnarokNpcEditor.Classes
             }
 
             var l = new List<ICompletionData>();
-            foreach (var c in MainForm.Singleton.AutoCompleteObjects.Where(o => o.Type == AEGISCompletionData.eType.Intellisense && o.Text.ToLower().StartsWith(expr.ToLower())))
+            foreach (var c in MainForm.Singleton.AutoCompleteObjects.Where(o => o.Type == AEGISCompletionData.eType.Snippet && o.Text.ToLower().StartsWith(expr.ToLower())))
             {
                 c.Expression = expr;
                 l.Add(c);

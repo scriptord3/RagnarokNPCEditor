@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<snippets>
+  <snippet key="weight">
+    var max_max_c = CheckMaxCount 1201 1
+    if max_max_c == 1
+      dialog "- Wait a minute !! -"
+      dialog "- Currently you're carrying -"
+      dialog "- too many items with you. -"
+      dialog "- Please try again -"
+      dialog "- after you loose some weight. -"
+      close
+      return
+    endif
+      var now_weight = v[VAR_MAXWEIGHT] - v[VAR_WEIGHT]
+      if (now_weight &lt; 2000)
+      dialog "- Wait a minute !! -"
+      dialog "- Currently you're carrying -"
+      dialog "- too many items with you. -"
+      dialog "- Please try again -"
+      dialog "- after you loose some weight. -"
+      close
+      return
+    endif
+  </snippet>
+</snippets>

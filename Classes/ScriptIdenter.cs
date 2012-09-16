@@ -76,7 +76,7 @@ namespace RagnarokNpcEditor.Classes
 				case "return":
 					if (indention == 1)
 					{
-                        indention--;
+                        //indention--;
                         sb.AppendFormat("{0}{1}\n", String.Concat(Enumerable.Repeat("  ", indention)), l);
                         bLastWasReturn = true;
 					}

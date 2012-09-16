@@ -14,7 +14,22 @@ namespace RagnarokNpcEditor.Classes
 		string description;
         int imageIndex;
         string expression;
+        eType type;
 		
+        public enum eType
+        {
+            Intellisense,
+            Snippet
+        }
+
+        public eType Type
+        {
+            get
+            {
+                return type;
+            }
+        }
+
 		public int ImageIndex {
 			get {
 				return imageIndex;
@@ -63,12 +78,13 @@ namespace RagnarokNpcEditor.Classes
 			return false;
 		}
 		
-		public AEGISCompletionData(string text, string description, int imageIndex, string expression)
+		public AEGISCompletionData(string text, string description, int imageIndex, string expression, eType type)
 		{
 			this.text        = text;
 			this.description = description;
             this.imageIndex = imageIndex;
             this.expression = expression;
+            this.type = type;
 		}
 		
 		public static int Compare(ICompletionData a, ICompletionData b)
