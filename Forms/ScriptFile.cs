@@ -137,7 +137,10 @@ namespace RagnarokNpcEditor
                 {
                     using (var sw = new StreamWriter(fs, _encoding))
                     {
-                        sw.Write(txtCode.Text.Replace("\t", "  ").Replace("\r\n", "\n").Replace("\r", "\n").Replace("\n", "\r\n"));
+                        var text = txtCode.Text.Replace("\r\n", "\n").Replace("\r", "\n").Replace("\n", "\r\n");
+                        if (Config.ReplaceTabWithSpace())
+                            text = text.Replace("\t", String.Concat(Enumerable.Repeat(" ", Config.Tabsize())));
+                        sw.Write(text);
                     }
                 }
                 _hasChanges = false;
@@ -290,7 +293,6 @@ namespace RagnarokNpcEditor
             List<FoldMarker> list = new List<FoldMarker>();
 
             Stack<Tuple<int, string>> startLines = new Stack<Tuple<int, string>>();
-
             // Create foldmarkers for the whole document, enumerate through every line.
             for (int i = 0; i < document.TotalNumberOfLines; i++)
             {
@@ -308,7 +310,7 @@ namespace RagnarokNpcEditor
                 //{
                 string text = document.GetText(offs, seg.Length - spaceCount);
 
-                if (text.StartsWith("OnTimer") || text.StartsWith("if") || text.StartsWith("choose") || text.StartsWith("case"))
+                if (text.StartsWith("OnTimer") || text.StartsWith("event On") || text.StartsWith("if") || text.StartsWith("choose") || text.StartsWith("case"))
                     startLines.Push(new Tuple<int, string>(i, text));
 
                 if ((text.StartsWith("return") || text.StartsWith("endif") || text.StartsWith("endchoose") || text.StartsWith("break")) && startLines.Count > 0)

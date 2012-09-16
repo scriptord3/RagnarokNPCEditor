@@ -14,5 +14,15 @@ namespace RagnarokNpcEditor.Classes
             }
             set {}
         }
+
+        public static bool ReplaceTabWithSpace()
+        {
+            return false;
+        }
+
+        public static int Tabsize()
+        {
+            return 2;
+        }
     }
 }
